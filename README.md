@@ -1,5 +1,4 @@
-# Advent of Code 
-***
+# ![title](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3jOK2wxE5meq4Qn32Z8I7BassGI5BwB6rhQ&s)Advent of Code 
 
 ## Motivation
 I started Advent of Code because I had a little motivational drop while doing the last part of the Meta Front End Certificate on Coursera.
