@@ -6,32 +6,32 @@ const txt = "day6.txt";
 const readFile = function(txt){
   return fs.readFileSync(txt).toString();
 };
-var puzzle = readFile(txt);
+var puzzle = readFile(txt).split("\n");
 
-// Test for Grid
-// Each index in testGrid = x coordinate and is filled with y coordinates
-// and state of light
-let testGrid = [];
-for(x = 0; x < 5; x++){
+// Create light grid 1000 x 1000
+let lightGrid = [];
+for(x = 0; x < 1000; x++){
   let yCoor = [];
-  for(y = 0; y < 5; y++){
+  for(y = 0; y < 1000; y++){
     yCoor.push({y, state:0})
   }
-  testGrid.push(yCoor);
+  lightGrid.push(yCoor);
 };
 
-// Tests
-let testCommands = ["toggle 2,1 through 4,2"];
-
-for(command = 0; command < testCommands.length; command ++){
-  let instruction = testCommands[command].split(" ");
-  let xRange = [];
-  let yRange = [];
-  xRange.push(instruction[1].split(",")[0]);
-  xRange.push(instruction[3].split(",")[0]);
-  yRange.push(instruction[1].split(",")[1]);
-  yRange.push(instruction[3].split(",")[1]);
-  console.log(xRange, yRange);
+// get coordinates and action from instruction
+function getInstructions(instruction) {
+  let toDo = [];
+  let raw = instruction.split(" ");
+  toDo.push(raw[0]);
+  toDo.push(raw[1].split(","));
+  toDo.push(raw[3].split(","));
+  return toDo;
 }
 
-//console.table(testGrid);
+// cycle through grid and perform actions
+function executeInstruction(commands){
+  // to do
+}
+
+//console.log(getInstructions(puzzle[0]));
+console.log(lightGrid[6][50].state);
