@@ -30,7 +30,7 @@ for(let ins = 0; ins < puzzle.length - 1; ins++){
   instructions.push(buffer);
 }
 
-// Create Grid of Lights
+// Create Grid of Lights for Part 1
 let lightGrid = [];
 for(let gridX = 0; gridX < 1000; gridX++){
   let tempoRow = [];
@@ -38,6 +38,16 @@ for(let gridX = 0; gridX < 1000; gridX++){
     tempoRow.push(0);
   }
   lightGrid.push(tempoRow);
+};
+
+// Create Grid of Lights for Part 2 
+let brightnessGrid = [];
+for(let brightX = 0; brightX < 1000; brightX++){
+  let tempoBright = [];
+  for(let brightY = 0; brightY < 1000; brightY++){
+    tempoBright.push(0)
+  }
+  brightnessGrid.push(tempoBright);
 };
 
 // Execute instruction
@@ -51,7 +61,7 @@ for(ins = 0; ins < instructions.length; ins++){
   let yStart = instructions[ins][1][1];
   let yEnd = instructions[ins][2][1];
 
-  // Execute Instructions
+  // Execute Instructions Part 1
   for(xRow = xStart; xRow <= xEnd; xRow++){
     for(yCol = yStart; yCol <= yEnd; yCol++){
       if(action == "toggle"){
@@ -69,6 +79,25 @@ for(ins = 0; ins < instructions.length; ins++){
       }
     }
   }
+
+  // Execute Instructions Part 2 
+  for(xRow = xStart; xRow <= xEnd; xRow++){
+    for(yCol = yStart; yCol <= yEnd; yCol++){
+      if(action == "toggle"){
+        brightnessGrid[xRow][yCol] = brightnessGrid[xRow][yCol] + 2;
+      }else if(action == "on"){
+        brightnessGrid[xRow][yCol] = brightnessGrid[xRow][yCol] + 1;
+      }else if(action == "off"){
+        if(brightnessGrid[xRow][yCol] > 0){
+          brightnessGrid[xRow][yCol] = brightnessGrid[xRow][yCol] - 1;
+        }
+      }else{
+        console.log("Oops something went wrong at", xRow, yCol);
+      }
+    }
+  }
+
+
  }
 
 // Count how many lights are on
@@ -80,4 +109,15 @@ for(countX = 0; countX < 1000; countX++){
     }
   }
 }
+
+// Count total brightness 
+let totalBrightness = 0;
+for(row = 0; row < 1000; row++){
+  for(col = 0; col < 1000; col++){
+    totalBrightness = totalBrightness + brightnessGrid[row][col];
+  }
+}
+
+
 console.log(countLights, "Lights are On");
+console.log("Total Brightness is", totalBrightness);
