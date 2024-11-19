@@ -32,13 +32,52 @@ for(let ins = 0; ins < puzzle.length - 1; ins++){
 
 // Create Grid of Lights
 let lightGrid = [];
-for(let gridX = 0; gridX < 10; gridX++){
+for(let gridX = 0; gridX < 1000; gridX++){
   let tempoRow = [];
-  for(let gridY = 0; gridY < 10; gridY++){
-    tempoRow.push([0]);
+  for(let gridY = 0; gridY < 1000; gridY++){
+    tempoRow.push(0);
   }
   lightGrid.push(tempoRow);
-}
+};
 
-lightGrid[1][1] = [1];
-console.table(lightGrid); 
+// Execute instruction
+
+for(ins = 0; ins < instructions.length; ins++){
+
+  // Store Instruction Details
+  let action = instructions[ins][0];
+  let xStart = instructions[ins][1][0];
+  let xEnd = instructions[ins][2][0];
+  let yStart = instructions[ins][1][1];
+  let yEnd = instructions[ins][2][1];
+
+  // Execute Instructions
+  for(xRow = xStart; xRow <= xEnd; xRow++){
+    for(yCol = yStart; yCol <= yEnd; yCol++){
+      if(action == "toggle"){
+        if(lightGrid[xRow][yCol] == 0){
+          lightGrid[xRow][yCol] = 1;
+        }else{
+          lightGrid[xRow][yCol] = 0;
+        }
+      }else if(action == "on"){
+        lightGrid[xRow][yCol] = 1;
+      }else if(action == "off"){
+        lightGrid[xRow][yCol] = 0;
+      }else{
+        console.log("Oops something went wrong at", xRow, yCol);
+      }
+    }
+  }
+ }
+
+// Count how many lights are on
+let countLights = 0;
+for(countX = 0; countX < 1000; countX++){
+  for(countY = 0; countY < 1000; countY++){
+    if(lightGrid[countX][countY] == 1){
+      countLights++;
+    }
+  }
+}
+console.log(countLights, "Lights are On");
