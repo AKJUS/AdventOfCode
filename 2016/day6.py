@@ -3,6 +3,7 @@
 comRaw = []
 columns = []
 message = ""
+newMessage = ""
 
 with open("day6.txt") as puzzle:
     for line in puzzle:
@@ -17,7 +18,6 @@ for snippets in comRaw:
     for index, char in enumerate(snippets):
         columns[index].append(char)
 
-# Part 1
 # Count how often each char appears in column
 for col in columns:
     counter = {}
@@ -26,7 +26,12 @@ for col in columns:
             occur = col.count(char)
             counter[char] = occur
     high = sorted(counter.values())
+    # Part 1
     key = [key for key, val in counter.items() if val == high[-1]]
     message += key[0]
+    # Part 2
+    key = [key for key, val in counter.items() if val == high[0]]
+    newMessage += key[0]
 
 print(f"The message for Part 1 = {message}")
+print(f"The message for Part 2 = {newMessage}")
