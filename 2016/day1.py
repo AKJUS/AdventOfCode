@@ -16,40 +16,85 @@ with open("day1.txt") as puzzle:
 
 # Part 1
 for turn in route:
+    moves = int(turn[1:])
     if turn[0] == "R" and lastMove == "N":
-        position["x"] += int(turn.replace("R", ""))
-        visited.append(position.copy())
+        for i in range(1, moves+1):
+            position["x"] += 1
+            if position.copy() in visited and len(firstTwice) == 0:
+                firstTwice.append(position.copy())
+                visited.append(position.copy())
+            else:
+                visited.append(position.copy())
         lastMove = "E"
     elif turn[0] == "L" and lastMove == "N":
-        position["x"] -= int(turn.replace("L", ""))
-        visited.append(position.copy())
+        for i in range(1, moves+1):
+            position["x"] -= 1
+            if position.copy() in visited and len(firstTwice) == 0:
+                firstTwice.append(position.copy())
+                visited.append(position.copy())
+            else:
+                visited.append(position.copy())
         lastMove = "W"
     elif turn[0] == "R" and lastMove == "E":
-        position["y"] -= int(turn.replace("R", ""))
-        visited.append(position.copy())
+        for i in range(1, moves+1):
+            position["y"] -= 1
+            if position.copy() in visited and len(firstTwice) == 0:
+                firstTwice.append(position.copy())
+                visited.append(position.copy())
+            else:
+                visited.append(position.copy())
         lastMove = "S"
     elif turn[0] == "L" and lastMove == "E":
-        position["y"] += int(turn.replace("L", ""))
-        visited.append(position.copy())
+        for i in range(1, moves+1):
+            position["y"] += 1
+            if position.copy() in visited and len(firstTwice) == 0:
+                firstTwice.append(position.copy())
+                visited.append(position.copy())
+            else:
+                visited.append(position.copy())
         lastMove = "N"
     elif turn[0] == "R" and lastMove == "S":
-        position["x"] -= int(turn.replace("R", ""))
-        visited.append(position.copy())
+        for i in range(1, moves+1):
+            position["x"] -= 1
+            if position.copy() in visited and len(firstTwice) == 0:
+                firstTwice.append(position.copy())
+                visited.append(position.copy())
+            else:
+                visited.append(position.copy())
         lastMove = "W"
     elif turn[0] == "L" and lastMove == "S":
-        position["x"] += int(turn.replace("L", ""))
-        visited.append(position.copy())
+        for i in range(1, moves+1):
+            position["x"] += 1
+            if position.copy() in visited and len(firstTwice) == 0:
+                firstTwice.append(position.copy())
+                visited.append(position.copy())
+            else:
+                visited.append(position.copy())
         lastMove = "E"
     elif turn[0] == "R" and lastMove == "W":
-        position["y"] += int(turn.replace("R", ""))
-        visited.append(position.copy())
+        for i in range(1, moves+1):
+            position["y"] += 1
+            if position.copy() in visited and len(firstTwice) == 0:
+                firstTwice.append(position.copy())
+                visited.append(position.copy())
+            else:
+                visited.append(position.copy())
         lastMove = "N"
     elif turn[0] == "L" and lastMove == "W":
-        position["y"] -= int(turn.replace("L", ""))
-        visited.append(position.copy())
+        for i in range(1, moves+1):
+            position["y"] -= 1
+            if position.copy() in visited and len(firstTwice) == 0:
+                firstTwice.append(position.copy())
+                visited.append(position.copy())
+            else:
+                visited.append(position.copy())
         lastMove = "S"
 
 print(f"Target Coordinates are: {position}")
 
 print(f"Shortest Distance in Blocks = {
       abs(position["x"]) + abs(position["y"])}")
+
+print(f"First block visited twice is at = {firstTwice[0]}")
+
+print(f"Shortest Distance to first block visited twice = {abs(firstTwice[0]["x"]) + abs(firstTwice[0]["y"])}")
