@@ -1,4 +1,2 @@
 # ![title](aocLogo.png)
-# Advent of Code 
-
-
+# Advent of Code
