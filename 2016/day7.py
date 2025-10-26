@@ -12,6 +12,8 @@ def main():
             ips.append(line.replace("\n", ""))
     # Part 1
     print(f"Part 1 found {part1(ips)} valid IPs")
+    # Part 2
+    print(f"Part 2 found {part2(ips)} valid IPs")
 
 
 def part1(ips):
@@ -46,7 +48,29 @@ def part1(ips):
 
 
 def part2(ips):
-    pass
+    validIP = 0
+    for ip in ips:
+        # Find all bracket enclosed hypernets
+        regex = r'\[([^\]]+)\]'
+        hypernets = re.findall(regex, ip)
+
+        # Remove all hypernets from ip and remove brackets
+        for hyper in hypernets:
+            hyper = "["+hyper+"]"
+            ip = ip.replace(hyper, " ")
+
+        # Check if sequence reoccurs in hyperset
+        def search(ip, hypernets):
+            for i in range(len(ip)-2):
+                if ip[i] == ip[i+2] and ip[i] != ip[i+1]:
+                    target = ip[i+1] + ip[i] + ip[i+1]
+                    for hyper in hypernets:
+                        if len(target) == 3 and target in hyper:
+                            return True
+        if search(ip, hypernets) == True:
+            validIP += 1
+    return validIP
+
 
 
 if __name__ == "__main__":
