@@ -7,6 +7,7 @@ def main():
     lastRow, sideLength = findSquare(puzzle)
     midPoint = math.floor(sideLength/2)
     radius = midPoint
+    # Part 1
     distance = (lastRow - midPoint) - puzzle + radius
     print(f"The Distance to the origin is {distance}")
 
