@@ -5,16 +5,20 @@ def main():
     # memory = [0, 2, 7, 0]
 
     # Part 1
-    print(f"Part 1 used {part1(memory)} redistribution cycles")
+    partOne, partTwo = part1(memory)
+    print(f"Part 1 used {partOne} redistribution cycles")
+    # Part 2
+    print(f"Part 2 used {partTwo} redistribution cycles")
+    
 
 
 def part1(memory):
     banks = list(memory)
-    seen = set()
-    cycles = 0
+    seen = []
+    cyclesPartOne = 0
 
     while tuple(banks) not in seen:
-        seen.add(tuple(banks))
+        seen.append(tuple(banks))
         max_blocks = max(banks)
         index = banks.index(max_blocks)
         banks[index] = 0
@@ -23,14 +27,23 @@ def part1(memory):
             banks[index] += 1
             max_blocks -= 1
 
-        cycles += 1
+        cyclesPartOne += 1
+    # Part 2
+    item = list(seen)[-1]
+    cyclesPartTwo = 0
+    while seen.count(item) != 2:
+        seen.append(tuple(banks))
+        max_blocks = max(banks)
+        index = banks.index(max_blocks)
+        banks[index] = 0
+        while max_blocks > 0:
+            index = (index + 1) % len(banks)
+            banks[index] += 1
+            max_blocks -= 1
 
-    return cycles
+        cyclesPartTwo += 1
 
-
-
-def part2():
-    pass
+    return cyclesPartOne, cyclesPartTwo
 
 
 if __name__ == "__main__":
